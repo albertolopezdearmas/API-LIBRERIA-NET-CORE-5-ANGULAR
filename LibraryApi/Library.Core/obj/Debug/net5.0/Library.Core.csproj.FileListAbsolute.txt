@@ -1,0 +1,11 @@
+C:\TFS\Test_Talycapglobal\Library.Core\bin\Debug\net5.0\Library.Core.deps.json
+C:\TFS\Test_Talycapglobal\Library.Core\bin\Debug\net5.0\Library.Core.dll
+C:\TFS\Test_Talycapglobal\Library.Core\bin\Debug\net5.0\Library.Core.pdb
+C:\TFS\Test_Talycapglobal\Library.Core\obj\Debug\net5.0\Library.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\TFS\Test_Talycapglobal\Library.Core\obj\Debug\net5.0\Library.Core.AssemblyInfoInputs.cache
+C:\TFS\Test_Talycapglobal\Library.Core\obj\Debug\net5.0\Library.Core.AssemblyInfo.cs
+C:\TFS\Test_Talycapglobal\Library.Core\obj\Debug\net5.0\Library.Core.csproj.CoreCompileInputs.cache
+C:\TFS\Test_Talycapglobal\Library.Core\obj\Debug\net5.0\Library.Core.dll
+C:\TFS\Test_Talycapglobal\Library.Core\obj\Debug\net5.0\ref\Library.Core.dll
+C:\TFS\Test_Talycapglobal\Library.Core\obj\Debug\net5.0\Library.Core.pdb
+C:\TFS\Test_Talycapglobal\Library.Core\bin\Debug\net5.0\ref\Library.Core.dll
