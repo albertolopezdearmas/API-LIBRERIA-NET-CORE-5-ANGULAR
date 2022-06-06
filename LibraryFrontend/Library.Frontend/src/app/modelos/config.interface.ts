@@ -1,0 +1,35 @@
+export class LanguageApp {
+  public static spanish_datatables = {
+    processing: 'Procesando...',
+    search: 'Buscar:',
+    lengthMenu: 'Mostrar _MENU_ elementos',
+    info: 'Mostrando desde _START_ al _END_ de _TOTAL_ elementos',
+    infoEmpty: 'Mostrando ningún elemento.',
+    infoFiltered: '(filtrado _MAX_ elementos total)',
+    infoPostFix: '',
+    loadingRecords: 'Cargando registros...',
+    zeroRecords: 'No se encontraron registros',
+    emptyTable: 'No hay datos disponibles en la tabla',
+    paginate: {
+      first: 'Primero',
+      previous: 'Anterior',
+      next: 'Siguiente',
+      last: 'Último',
+    },
+    aria: {
+      sortAscending: ': Activar para ordenar la tabla en orden ascendente',
+      sortDescending: ': Activar para ordenar la tabla en orden descendente',
+    },
+  };
+}
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'D/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM Y',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM Y',
+  },
+};

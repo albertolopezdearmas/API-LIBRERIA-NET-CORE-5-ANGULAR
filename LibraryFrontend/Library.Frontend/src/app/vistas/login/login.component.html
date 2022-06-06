@@ -1,0 +1,27 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <br />
+    <h2 class="fadeIn first">Inicio de sesión</h2>
+
+    <!-- Login Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
+      <input
+        type="text"
+        id="username"
+        class="fadeIn second"
+        formControlName="username"
+        placeholder="Usuario"
+        autocomplete="off"
+      />
+      <input
+        type="password"
+        id="password"
+        class="fadeIn third"
+        formControlName="password"
+        placeholder="Contraseña"
+      />
+      <input type="submit" class="fadeIn fourth" value="Entrar" />
+    </form>
+  </div>
+</div>

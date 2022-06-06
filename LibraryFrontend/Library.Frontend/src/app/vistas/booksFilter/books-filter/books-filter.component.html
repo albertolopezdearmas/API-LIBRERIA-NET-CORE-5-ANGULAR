@@ -1,0 +1,99 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="row">
+    <div class="align-items-center">
+      <h2 class="text-center">Buscar Libros</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">Filtrar por autor:</div>
+        <div class="card-body">
+          <mat-form-field appearance="fill">
+            <mat-label>seleccione un autor</mat-label>
+            <mat-select [(value)]="selectedValue" (selectionChange)="Filtrar()">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let autor of authors" [value]="autor.idBook">
+                {{ autor.firstName }} {{ autor.lastName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">Filtrar por fecha:</div>
+        <div class="card-body">
+          <mat-form-field appearance="legacy">
+            <mat-label>Elija rango de fechas</mat-label>
+            <mat-date-range-input
+              [rangePicker]="picker"
+              [formGroup]="dateRange"
+            >
+              <input
+                matStartDate
+                formControlName="start"
+                placeholder="Fecha inicial"
+              />
+              <input
+                matEndDate
+                formControlName="end"
+                placeholder="Fecha final"
+                (dateChange)="Filtrar()"
+              />
+            </mat-date-range-input>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h2>Libros</h2>
+      <table
+        #dTable
+        datatable
+        [dtOptions]="dtOptionsLibros"
+        class="table table-striped row-border hover"
+        cellspacing="0"
+        [dtTrigger]="dtTrigger"
+      >
+        <thead>
+          <tr>
+            <th scope="col ">#N</th>
+            <th scope="col ">Título</th>
+            <th scope="col ">Descripción</th>
+            <th scope="col ">No. Paginas</th>
+            <th scope="col ">Resumen</th>
+            <th scope="col ">Publicado el</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="books?.length != 0">
+          <tr *ngFor="let book of books">
+            <th scope="row">{{ book.id }}</th>
+            <td>{{ book.title }}</td>
+            <td>{{ book.description }}</td>
+            <td class="text-rigth">{{ book.pageCount }}</td>
+            <td>{{ book.excerpt }}</td>
+            <td>{{ book.publishDate | date: "dd/MM/yyyy hh:mm:ss" }}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="books?.length == 0">
+          <tr>
+            <td colspan="6" class="no-data-available text-center">No data!</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
