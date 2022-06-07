@@ -56,11 +56,21 @@
       </div>
     </div>
   </div>
-
+  <br />
+  <div class="text-center">
+    <h1>Lista de libros</h1>
+  </div>
   <div class="row">
     <div class="col-12">
-      <h2>Libros</h2>
+      <button class="btn btn-success" (click)="exportToExcel()">
+        <i class="bi bi-file-excel"></i>
+        Exportar a excel
+      </button>
+    </div>
+    <div class="col-12"><br /></div>
+    <div class="col-12">
       <table
+        id="season-tble"
         #dTable
         datatable
         [dtOptions]="dtOptionsLibros"

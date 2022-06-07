@@ -5,7 +5,8 @@ import { AuthorI } from 'src/app/modelos/author.interface';
 import { DataI } from 'src/app/modelos/data.interface';
 import { LanguageApp } from 'src/app/modelos/config.interface';
 import { BookI } from 'src/app/modelos/book.interface';
-
+import { AlertComponent } from '../../../components/share/alert/alert.component';
+import { MatDialog } from '@angular/material/dialog';
 declare const $: any;
 @Component({
   selector: 'app-synchronize',
@@ -13,7 +14,7 @@ declare const $: any;
   styleUrls: ['./synchronize.component.css'],
 })
 export class SynchronizeComponent implements OnInit {
-  constructor(private api: ApiService, private router: Router) {}
+  constructor(private api: ApiService, public alert: MatDialog) {}
   dtOptionsLibros: DataTables.Settings = {};
   dtOptionsAutores: DataTables.Settings = {};
 
@@ -22,9 +23,9 @@ export class SynchronizeComponent implements OnInit {
   authors: AuthorI[] = [];
   sincronizado: boolean = false;
   errorStratus: boolean = false;
-  errorMsj: string = '';
+
   successStratus: boolean = false;
-  Msj: string = '';
+
   ngOnInit(): void {
     this.GetSyncrhonize();
   }
@@ -89,12 +90,22 @@ export class SynchronizeComponent implements OnInit {
       next: (data) => {
         this.sincronizado = <boolean>(<unknown>data.data);
         if (this.sincronizado) {
-          this.successStratus = true;
-          this.Msj = 'Datos sincronizado con éxito';
+          this.alert
+            .open(AlertComponent, {
+              width: '300px',
+              data: 'Datos sincronizados con éxito',
+            })
+            .afterClosed()
+            .subscribe();
           this.GetSyncrhonize();
         } else {
-          this.errorStratus = true;
-          this.errorMsj = 'Error al sincronizar los datos';
+          this.alert
+            .open(AlertComponent, {
+              width: '300px',
+              data: 'Error al sincronizar los dotas',
+            })
+            .afterClosed()
+            .subscribe();
         }
       },
       error: (error) => {

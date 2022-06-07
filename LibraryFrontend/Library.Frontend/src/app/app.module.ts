@@ -17,7 +17,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-
+import { ConfirmDialogComponent } from './components/share/confirm-dialog/confirm-dialog.component';
+import { AlertComponent } from './components/share/alert/alert.component';
+import { MatTableExporterModule } from 'mat-table-exporter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,8 @@ import { MatButtonModule } from '@angular/material/button';
     routingComponents,
     SynchronizeComponent,
     BooksFilterComponent,
+    ConfirmDialogComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatDialogModule,
     MatButtonModule,
+    MatTableExporterModule,
   ],
+  entryComponents: [ConfirmDialogComponent, AlertComponent],
   providers: [{ provide: MatNativeDateModule, useValue: 'es-CO' }],
   bootstrap: [AppComponent],
 })

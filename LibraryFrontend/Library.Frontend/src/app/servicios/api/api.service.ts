@@ -29,6 +29,7 @@ export class ApiService {
     let direccion = this.url + '/api/book/';
 
     let params = new HttpParams();
+    console.log(queryFilter.queryFilter.length);
     params = params.append('PageSize', queryFilter.queryFilter.length);
     params = params.append(
       'PageNumber',

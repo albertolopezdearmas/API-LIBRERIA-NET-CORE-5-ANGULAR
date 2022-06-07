@@ -90,7 +90,7 @@ namespace Library.Core.Services
 
 
             filters.PageNumber = filters.PageNumber == 0 ? _paginationOptions.DefaultPageNumber : filters.PageNumber;
-            filters.PageSize = filters.PageSize == 0 ? _paginationOptions.DefaultPageSize : filters.PageSize;
+            filters.PageSize = (int)(filters.PageSize == 0 ? _paginationOptions.DefaultPageSize : (filters.PageSize==-1?items.Count: filters.PageSize));
             var paged = PagedList<Book>.Create(items, filters.PageNumber, filters.PageSize);
             return paged;
         }

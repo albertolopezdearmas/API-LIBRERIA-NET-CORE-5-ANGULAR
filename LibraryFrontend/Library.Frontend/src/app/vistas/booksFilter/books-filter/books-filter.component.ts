@@ -18,7 +18,7 @@ import { AuthorI } from 'src/app/modelos/author.interface';
 import { LanguageApp, MY_DATE_FORMATS } from 'src/app/modelos/config.interface';
 import { DataI } from 'src/app/modelos/data.interface';
 import { BookI } from 'src/app/modelos/book.interface';
-
+import * as XLSX from 'xlsx';
 declare const $: any;
 @Component({
   selector: 'app-books-filter',
@@ -44,13 +44,39 @@ export class BooksFilterComponent implements OnInit, AfterViewInit, OnDestroy {
   idBook: string | any;
   fechaInicial: Date | any;
   fechaFinal: Date | any;
+  actualizando = false;
 
+  exportToExcel(): void {
+    this.actualizando = true;
+    let index = $('.dataTables_length select').val();
+    $('.dataTables_length select').val('-1').change();
+    console.log(index + '+' + this.actualizando);
+    console.log($('.dataTables_length select').val());
+
+    setTimeout(() => {
+      this.descargarExcel(index);
+    }, 100);
+  }
+  descargarExcel(index: any): void {
+    setTimeout(() => {
+      console.log(index + '+' + this.actualizando);
+      if (!this.actualizando) {
+        let element = document.getElementById('season-tble');
+        const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+        const book: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(book, worksheet, 'Sheet1');
+        XLSX.writeFile(book, 'ExcelSheet.xlsx');
+        $('.dataTables_length select').val(index).change();
+      } else {
+        this.descargarExcel(index);
+      }
+    }, 500);
+  }
   ngAfterViewInit(): void {
     this.dtTrigger.next(null);
   }
 
   ngOnDestroy(): void {
-    // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
 
@@ -78,6 +104,11 @@ export class BooksFilterComponent implements OnInit, AfterViewInit, OnDestroy {
       search: { search: lastSearchTextLibro }, // Last Searched Text
       serverSide: true,
       processing: true,
+
+      lengthMenu: [
+        [10, 25, 50, -1],
+        [10, 25, 50, 'todos'],
+      ],
       ajax: (dataTablesParameters: any, callback) => {
         lastPageLibro = dataTablesParameters.start; // Note :  dataTablesParameters.start = page count * table length
         lastSearchTextLibro = dataTablesParameters.search.value;
@@ -89,6 +120,7 @@ export class BooksFilterComponent implements OnInit, AfterViewInit, OnDestroy {
           .getBooks({ queryFilter: dataTablesParameters })
           .then((data) => {
             this.books = <BookI[]>(<unknown>data.data);
+            this.actualizando = false;
             callback({
               recordsTotal: data.meta.totalCount,
               recordsFiltered: data.meta.totalCount,
@@ -128,6 +160,5 @@ export class BooksFilterComponent implements OnInit, AfterViewInit, OnDestroy {
       this.fechaInicial = null;
       this.fechaFinal = null;
     }
-    this.rerender();
   }
 }
