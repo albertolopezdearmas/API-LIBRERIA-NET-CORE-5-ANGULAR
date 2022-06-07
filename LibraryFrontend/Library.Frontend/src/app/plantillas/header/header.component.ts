@@ -8,8 +8,15 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   constructor(private router: Router) {}
-
-  ngOnInit(): void {}
+  checkTokenCookies() {
+    let token = localStorage.getItem('token');
+    if (token === null || token === '' || token == undefined) {
+      this.router.navigate(['/']);
+    }
+  }
+  ngOnInit(): void {
+    this.checkTokenCookies();
+  }
   salir() {
     localStorage.clear();
 
